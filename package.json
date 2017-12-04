@@ -1,0 +1,31 @@
+{
+  "name": "assets",
+  "version": "0.0.1",
+  "description": "implements assets functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/course-nodejs/assets.git"
+  },
+  "keywords": [
+    "assets",
+    "collina",
+    "nodejs"
+  ],
+  "author": "fiblan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/course-nodejs/assets/issues"
+  },
+  "homepage": "https://github.com/course-nodejs/assets#readme",
+  "dependencies": {
+    "mongodb": "^2.2.33"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  }
+}
