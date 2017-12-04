@@ -8,7 +8,7 @@ const config = {
         dsn: "mongodb://localhost:27017/projectx",
         collection_name: "assets",
         options: {
-            keepAlive: 1, connectTimeoutMS: 30000
+            keepAlive: 1, connectTimeoutMS: 30000, ssl:true
         }
     }
 };
