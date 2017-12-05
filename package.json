@@ -1,5 +1,5 @@
 {
-  "name": "@fiblan/assets",
+  "name": "@fiblan/assets-service",
   "version": "0.0.1",
   "description": "implements assets functions",
   "main": "index.js",
