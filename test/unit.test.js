@@ -11,40 +11,28 @@ const datatest = { name:'Sedia', state: 'wait' }
 MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
   let asset = new Asset(db.collection(config.db.collection_name)) 
   
-  test('test insert', function (childTest) {
-    asset.insert({ name: 'Sedia', state: 'wait'}, function (err, res) {
-      if (err) throw err
-      db.collection(config.db.collection_name).find({name: 'Sedia', state: 'wait'}).toArray(function (err, res) {
-        if (err) throw err
-        db.close()
-        childTest.end()
-      })
+    test('test insert', function (childTest) {
+        asset.insert({ name: 'Sedia', state: 'wait'}, function (err, res) {
+          if (err) throw err
+          db.collection(config.db.collection_name).find({name: 'Sedia', state: 'wait'}).toArray(function (err, res) {
+            if (err) throw err
+            childTest.end()
+          })
+        })
     })
-  })
-})
-
-MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
-    let asset = new Asset(db.collection(config.db.collection_name))
-
     test('test update', function (childTest) {
         asset.insert({ name: 'Sedia', state: 'wait'}, function (err, res) {
-        if (err) throw err
+            if (err) throw err
             asset.updateState(res.uuid, 'operational', function (err, res) {
                 if (err) throw err
-                    db.collection(config.db.collection_name).find({name: 'Sedia', state: 'operational'}).toArray(function (err, res) {
-                        if (err) throw err
-                        childTest.equal(res, 'Sedia')
-                        db.close()
-                        childTest.end()
-                    })
+                db.collection(config.db.collection_name).find({name: 'Sedia', state: 'operational'}).toArray(function (err, res) {
+                    if (err) throw err
+                    childTest.equal(res, 'Sedia')
+                    childTest.end()
+                })
             })
         })
     })
-})
-
-MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
-    let asset = new Asset(db.collection(config.db.collection_name))
-
     test('test query', function (childTest) {
         asset.insert({ name: 'Sedia', state: 'wait'}, function (err, res) {
             if (err) throw err
@@ -52,10 +40,10 @@ MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
                 if (err) throw err
                 console.log(res)
                 childTest.equal(res, 'wait')
+                db.close()
                 childTest.end()
             })
         })
     })
+
 })
-
-
