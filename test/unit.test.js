@@ -22,3 +22,40 @@ MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
     })
   })
 })
+
+MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
+    let asset = new Asset(db.collection(config.db.collection_name))
+
+    test('test update', function (childTest) {
+        asset.insert({ name: 'Sedia', state: 'wait'}, function (err, res) {
+        if (err) throw err
+            asset.updateState(res.uuid, 'operational', function (err, res) {
+                if (err) throw err
+                    db.collection(config.db.collection_name).find({name: 'Sedia', state: 'operational'}).toArray(function (err, res) {
+                        if (err) throw err
+                        childTest.equal(res, 'Sedia')
+                        db.close()
+                        childTest.end()
+                    })
+            })
+        })
+    })
+})
+
+MongoClient.connect(config.db.dsn, config.db.options, function (err, db) {
+    let asset = new Asset(db.collection(config.db.collection_name))
+
+    test('test query', function (childTest) {
+        asset.insert({ name: 'Sedia', state: 'wait'}, function (err, res) {
+            if (err) throw err
+            asset.queryState(res.uuid, function (err, res) {
+                if (err) throw err
+                console.log(res)
+                childTest.equal(res, 'wait')
+                childTest.end()
+            })
+        })
+    })
+})
+
+
