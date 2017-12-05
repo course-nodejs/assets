@@ -1,3 +1,0 @@
-// test/basic.js
-var tap = require('tap')
-tap.pass('this is fine')
